@@ -1,2 +1,2 @@
-# test-opencode-cowgame
-Тестовое задание в компанию OpenCode
+# Тестовое задание в компанию OpenCode
+
