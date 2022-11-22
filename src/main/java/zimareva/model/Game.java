@@ -9,9 +9,14 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Integer result;
+    private String generatedNumber;
+    private Integer numberOfAttempts;
 
     public Game() {
+    }
+
+    public Game(String generatedNumber) {
+        this.generatedNumber = generatedNumber;
     }
 
     public Long getId() {
@@ -22,11 +27,28 @@ public class Game {
         this.id = id;
     }
 
-    public Integer getResult() {
-        return result;
+    public Integer getNumberOfAttempts() {
+        return numberOfAttempts;
     }
 
-    public void setResult(Integer result) {
-        this.result = result;
+    public void setNumberOfAttempts(Integer numberOfAttempts) {
+        this.numberOfAttempts = numberOfAttempts;
+    }
+
+    public String getGeneratedNumber() {
+        return generatedNumber;
+    }
+
+    public void setGeneratedNumber(String generatedNumber) {
+        this.generatedNumber = generatedNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", generatedNumber=" + generatedNumber +
+                ", numberOfAttempts=" + numberOfAttempts +
+                '}';
     }
 }

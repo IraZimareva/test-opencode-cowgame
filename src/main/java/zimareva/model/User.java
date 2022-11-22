@@ -21,7 +21,8 @@ public class User {
     private List<Attempt> attempts = new ArrayList<>();*/
 
     @OneToMany(
-            fetch = FetchType.LAZY,
+            //todo:лучше Lazy или Eager в данном случае?
+            fetch = FetchType.EAGER,
             cascade = CascadeType.ALL
     )
     @JoinColumn(name = "user_id")
@@ -84,6 +85,10 @@ public class User {
         this.games = games;
     }
 
+    public void addNewGame(Game game){
+        games.add(game);
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -92,7 +97,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
 //                ", attempts=" + attempts +
-//                ", games=" + this.getGames() +
+                ", games=" + this.getGames() +
                 '}';
     }
 }
