@@ -37,8 +37,10 @@ public class MainService {
     public void checkNumber(Long userId, Long gameId, String number){
         Game currGame = gameService.getGame(gameId);
         User currUser = userService.getUser(userId);
-        boolean resultOfChecking = Checker.checkNumber(number, currGame.getBenchmarkNumber());
+        int [] resultOfChecking = Checker.checkNumber(number, currGame.getBenchmarkNumber());
 
+
+        //не забыть прибавлять попытки
 
     }
 
