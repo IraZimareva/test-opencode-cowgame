@@ -4,8 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import zimareva.model.User;
+import zimareva.service.MainService;
 import zimareva.service.UserService;
+import zimareva.utils.Converter;
 import zimareva.utils.Randomizer;
+
+import java.util.List;
 
 @SpringBootApplication
 public class CowGameApplication {
@@ -21,13 +25,24 @@ public class CowGameApplication {
         userService.addUser(user);
 
         //Start new game
-        userService.startNewGame(1L);
-        System.out.println("users games" + userService.getUser(1L).getGames());
-        System.out.println(userService.getUser(1L));
+        MainService mainService=
+                configurableApplicationContext.getBean(MainService.class);
+        mainService.startNewGame(1L);
 
-        //Тест на генерацию значений
+        System.out.println("\n users games" + userService.getUser(1L).getGames());
+        System.out.println(userService.getUser(1L));
+        String benchmarkNumber = userService.getUser(1L).getGames().get(0).getBenchmarkNumber();
+        System.out.println("\n Benchmark number look like this " + benchmarkNumber);
+
+        //Тест на генерацию значений по условию неповторяемости элементов
        /* for(int i=0; i < 5; i++){
             System.out.println("Generated value " + Randomizer.generateGameNumber());
         }*/
+
+       //Тест Конвертера
+        List<Integer> listOfInteger = Converter.convertStringToListOfInteger(benchmarkNumber);
+        System.out.println("List of Integer after converting " + listOfInteger);
+
+
     }
 }

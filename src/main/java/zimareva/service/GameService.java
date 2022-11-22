@@ -2,6 +2,7 @@ package zimareva.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import zimareva.exception.GameNotFoundException;
 import zimareva.model.Game;
 import zimareva.repository.GameRepository;
 
@@ -17,5 +18,10 @@ public class GameService {
 
     public Game addGame(Game game){
         return gameRepository.save(game);
+    }
+
+    public Game getGame(Long gameId){
+        return gameRepository.findById(gameId).orElseThrow(() ->
+                new GameNotFoundException(gameId));
     }
 }

@@ -14,12 +14,6 @@ public class User {
     private String fio;
     private String email;
     private String password;
-/*    @OneToMany(
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(name = "user_id")
-    private List<Attempt> attempts = new ArrayList<>();*/
-
     @OneToMany(
             //todo:лучше Lazy или Eager в данном случае?
             fetch = FetchType.EAGER,
