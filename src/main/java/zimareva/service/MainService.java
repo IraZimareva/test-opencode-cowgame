@@ -26,14 +26,13 @@ public class MainService {
     @Transactional
     public Game startNewGame(Long userId) {
         String generatedNumber = Converter.convertListOfIntegerToString(Randomizer.generateGameNumber());
-        Game game = new Game(generatedNumber, new Integer(0));
+        Game game = new Game(generatedNumber, 0);
         gameService.addGame(game);
         User currUser = userService.getUser(userId);
         currUser.addNewGame(game);
         return game;
     }
 
-    //todo: может вынести ResultDTO в поле класса, чтобы каждый раз не создавать новый объект или фигня?
     public ResultDTO checkNumber(Long gameId, String number) {
         Game currGame = gameService.getGame(gameId);
         ResultDTO resultDTO = Checker.checkNumber(number, currGame.getBenchmarkNumber());
