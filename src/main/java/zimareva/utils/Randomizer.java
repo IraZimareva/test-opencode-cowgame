@@ -12,8 +12,9 @@ public class Randomizer {
         int nextNumber;
         while(generatedValue.size() < 4){
             nextNumber = generateRandomNumber();
-            if(generatedValue.contains(nextNumber))
+            if(generatedValue.contains(nextNumber)) {
                 continue;
+            }
             generatedValue.add(nextNumber);
         }
         return generatedValue;

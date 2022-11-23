@@ -6,6 +6,8 @@ import zimareva.exception.GameNotFoundException;
 import zimareva.model.Game;
 import zimareva.repository.GameRepository;
 
+import javax.transaction.Transactional;
+
 @Service
 public class GameService {
 
@@ -23,5 +25,12 @@ public class GameService {
     public Game getGame(Long gameId){
         return gameRepository.findById(gameId).orElseThrow(() ->
                 new GameNotFoundException(gameId));
+    }
+
+    @Transactional
+    public Game editNumberOfAttempts(Long id, int numberOfAttempts){
+        Game gameToEdit = getGame(id);
+        gameToEdit.setNumberOfAttempts(numberOfAttempts);
+        return gameToEdit;
     }
 }

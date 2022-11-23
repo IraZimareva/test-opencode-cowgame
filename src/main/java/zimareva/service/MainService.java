@@ -7,6 +7,7 @@ import zimareva.model.User;
 import zimareva.utils.Checker;
 import zimareva.utils.Converter;
 import zimareva.utils.Randomizer;
+import zimareva.utils.ResultDTO;
 
 import javax.transaction.Transactional;
 
@@ -23,25 +24,20 @@ public class MainService {
     }
 
     @Transactional
-    public Game startNewGame(Long userId){
+    public Game startNewGame(Long userId) {
         String generatedNumber = Converter.convertListOfIntegerToString(Randomizer.generateGameNumber());
-        Game game = new Game(generatedNumber);
+        Game game = new Game(generatedNumber, new Integer(0));
         gameService.addGame(game);
         User currUser = userService.getUser(userId);
         currUser.addNewGame(game);
         return game;
     }
 
-    //todo: второй вариант - вытаскивать текущего юзера из текущей игры (но тогда надо сделать двунаправленную связь в сущностях)
-    //todo: дописать логику и переписать сигнатуру метода
-    public void checkNumber(Long userId, Long gameId, String number){
+    //todo: может вынести ResultDTO в поле класса, чтобы каждый раз не создавать новый объект или фигня?
+    public ResultDTO checkNumber(Long gameId, String number) {
         Game currGame = gameService.getGame(gameId);
-        User currUser = userService.getUser(userId);
-        int [] resultOfChecking = Checker.checkNumber(number, currGame.getBenchmarkNumber());
-
-
-        //не забыть прибавлять попытки
-
+        ResultDTO resultDTO = Checker.checkNumber(number, currGame.getBenchmarkNumber());
+        gameService.editNumberOfAttempts(gameId, currGame.getNumberOfAttempts() + 1);
+        return resultDTO;
     }
-
 }

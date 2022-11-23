@@ -15,8 +15,9 @@ public class Game {
     public Game() {
     }
 
-    public Game(String benchmarkNumber) {
+    public Game(String benchmarkNumber, Integer numberOfAttempts) {
         this.benchmarkNumber = benchmarkNumber;
+        this.numberOfAttempts = numberOfAttempts;
     }
 
     public Long getId() {

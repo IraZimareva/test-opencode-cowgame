@@ -9,6 +9,7 @@ import zimareva.service.UserService;
 import zimareva.utils.Checker;
 import zimareva.utils.Converter;
 import zimareva.utils.Randomizer;
+import zimareva.utils.ResultDTO;
 
 import java.util.List;
 
@@ -50,5 +51,10 @@ public class CowGameApplication {
         System.out.println("\n Check benchmrk with benchmark \n");
         Checker.checkNumber(benchmarkNumber, benchmarkNumber);*/
 
+        //Тест метода zimareva.service.MainService.checkNumber
+        /*ResultDTO result = mainService.checkNumber(2L, new String("1234"));
+        System.out.println("\n Result DTO id " + result);
+        System.out.println("\n Users games after attempt " + userService.getUser(1L).getGames());
+*/
     }
 }

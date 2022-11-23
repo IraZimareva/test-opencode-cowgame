@@ -4,23 +4,18 @@ import java.util.List;
 
 public class Checker {
 
-    //todo: дописать логику
-    public static int [] checkNumber(String checkNumberStr, String benchmarkNumberStr){
+    public static ResultDTO checkNumber(String checkNumberStr, String benchmarkNumberStr){
         List<Integer> checkNumber = Converter.convertStringToListOfInteger(checkNumberStr);
         List<Integer> benchmarkNumber = Converter.convertStringToListOfInteger(benchmarkNumberStr);
-        int cow;
-        int bull;
-        int [] result = new int[2];
 
-        cow = checkCow(checkNumber, benchmarkNumber);
-        bull = checkBull(checkNumber, benchmarkNumber);
-        result[0] = bull;
-        result[1] = cow - bull;
+        int cow = checkCow(checkNumber, benchmarkNumber);
+        int bull = checkBull(checkNumber, benchmarkNumber);
+        ResultDTO resultDTO = new ResultDTO(bull, cow - bull);
 
-        System.out.println("Check bull " + result[0]);
-        System.out.println("Check cow " + result[1]);
+        System.out.println("Check bull " + resultDTO.getBull());
+        System.out.println("Check cow " + resultDTO.getCow());
 
-        return null ;
+        return resultDTO;
     }
 
     //todo: такая проверка выдаст неправильное значение для повторяющихся чисел пользавтеля
@@ -28,7 +23,9 @@ public class Checker {
     private static int checkCow(List<Integer> checkNumber, List<Integer> benchmarkNumber){
         int cow = 0;
         for(Integer number: checkNumber){
-            if(benchmarkNumber.contains(number)) cow++;
+            if(benchmarkNumber.contains(number)) {
+                cow++;
+            }
         }
         return cow;
     }
@@ -36,7 +33,9 @@ public class Checker {
     private static int checkBull(List<Integer> checkNumber, List<Integer> benchmarkNumber){
         int bull = 0;
         for(int i = 0; i < 4; i++){
-            if(checkNumber.get(i).equals(benchmarkNumber.get(i))) bull++;
+            if(checkNumber.get(i).equals(benchmarkNumber.get(i))) {
+                bull++;
+            }
         }
         return bull;
     }
