@@ -23,13 +23,4 @@ public class AttemptService {
         return attemptRepository.findById(attemptId).orElseThrow(() ->
                 new EntityNotFoundException(Attempt.class.getName(), attemptId));
     }
-
-    /*public int incrementNumberOfAttempts(Long id){
-        Game gameToEdit = getGame(id);
-        System.out.println("Было до инкрементации попыток " + gameToEdit.getNumberOfAttempts());
-        gameToEdit.setNumberOfAttempts(gameToEdit.getNumberOfAttempts() + 1);
-        int incrAttempts = gameToEdit.getNumberOfAttempts();
-        System.out.println("Стало после инкремента попыток " + incrAttempts);
-        return incrAttempts;
-    }*/
 }
