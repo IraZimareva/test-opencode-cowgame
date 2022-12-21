@@ -5,21 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "person")
 public class User {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fio;
     private String email;
     private String password;
     @OneToMany(
-            //todo:лучше Lazy или Eager в данном случае?
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
+            fetch = FetchType.LAZY
     )
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "person_id")
     private List<Game> games = new ArrayList<>();
 
     public User() {
@@ -62,14 +59,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-/*
-    public List<Attempt> getAttempts() {
-        return attempts;
-    }
-
-    public void setAttempts(List<Attempt> attempts) {
-        this.attempts = attempts;
-    }*/
 
     public List<Game> getGames() {
         return games;
@@ -90,8 +79,7 @@ public class User {
                 ", fio='" + fio + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-//                ", attempts=" + attempts +
-                ", games=" + this.getGames() +
+//                ", games=" + this.getGames() +
                 '}';
     }
 }

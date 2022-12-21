@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="create_table_game" author="Zimareva">
+        <createTable tableName="game">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="benchmark_number" type="VARCHAR(4)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="number_of_attempts" type="BIGINT" defaultValueNumeric="0" />
+            <column name="is_over" type="boolean" defaultValueBoolean="false"/>
+            <column name="person_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="add_fk_person_id_to_person" author="Zimareva">
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="game"
+                                 constraintName="fk_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"
+                                 onDelete="SET NULL"/>
+    </changeSet>
+</databaseChangeLog>
