@@ -9,7 +9,7 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
             <column autoIncrement="true" name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="enteredNumber" type="VARCHAR(4)" />
+            <column name="entered_number" type="VARCHAR(4)" />
             <column name="game_id" type="BIGINT"/>
         </createTable>
     </changeSet>
