@@ -2,41 +2,51 @@ package zimareva.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import zimareva.dto.NumberDTO;
+import zimareva.dto.ResultDTO;
+import zimareva.model.Attempt;
 import zimareva.model.Game;
 import zimareva.model.User;
-import zimareva.utils.Checker;
-import zimareva.utils.Converter;
-import zimareva.utils.Randomizer;
-import zimareva.utils.ResultDTO;
+import zimareva.utils.*;
 
 import javax.transaction.Transactional;
 
 @Service
 public class MainService {
-
     private final UserService userService;
     private final GameService gameService;
+    private final AttemptService attemptService;
+
 
     @Autowired
-    public MainService(UserService userService, GameService gameService) {
+    public MainService(UserService userService, GameService gameService, AttemptService attemptService) {
         this.userService = userService;
         this.gameService = gameService;
+        this.attemptService = attemptService;
     }
 
     @Transactional
     public Game startNewGame(Long userId) {
         String generatedNumber = Converter.convertListOfIntegerToString(Randomizer.generateGameNumber());
-        Game game = new Game(generatedNumber, 0);
+        Game game = new Game(generatedNumber);
         gameService.addGame(game);
         User currUser = userService.getUser(userId);
         currUser.addNewGame(game);
         return game;
     }
 
-    public ResultDTO checkNumber(Long gameId, String number) {
-        Game currGame = gameService.getGame(gameId);
-        ResultDTO resultDTO = Checker.checkNumber(number, currGame.getBenchmarkNumber());
-        gameService.editNumberOfAttempts(gameId, currGame.getNumberOfAttempts() + 1);
+    @Transactional
+    public ResultDTO checkNumber(NumberDTO number) {
+        Game currGame = gameService.getGame(number.getGameId());
+        String enteredNumber = number.concatValueToString();
+        System.out.println("Сконкатенированный NumberDTO " + enteredNumber);
+        Attempt attempt = attemptService.addAttempt(new Attempt(enteredNumber));
+        currGame.addNewAttempt(attempt);
+        ResultDTO resultDTO = Checker.checkNumber(enteredNumber, currGame.getBenchmarkNumber());
+        gameService.incrementNumberOfAttempts(number.getGameId());
+        if(resultDTO.getBull() == 4){
+            currGame.setOver(true);
+        }
         return resultDTO;
     }
 }
