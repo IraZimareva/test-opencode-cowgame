@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<h2 align="center">Веб-игра быки-коровы</h2>
+
+<div class="container shadow mt-4 bg-light py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8" align="center">
+            <p>Привет, <span th:text="${user.getFio()}">Name</span>!</p>
+            <form method="POST" th:action="@{/games(user_id=${user.getId()})}" class="mb-3" name="startGame">
+                <button type="submit" class="btn btn-success btn-lg"
+                        style="width:200px;height:100px">Играть</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

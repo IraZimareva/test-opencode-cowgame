@@ -3,14 +3,15 @@ package zimareva.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import zimareva.model.User;
 import zimareva.service.UserService;
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
-
     private final UserService userService;
 
     @Autowired
@@ -19,14 +20,15 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody final User user){
+    public ResponseEntity<User> createUser(@RequestBody final User user) {
         User addedUser = userService.addUser(user);
         return new ResponseEntity<>(addedUser, HttpStatus.OK);
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<User> getUser(@PathVariable final Long id){
+    public String getUser(@PathVariable final Long id, Model model) {
         User user = userService.getUser(id);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        model.addAttribute("user", user);
+        return "index";
     }
 }
