@@ -1,8 +1,9 @@
-package zimareva.utils;
+package zimareva.dto;
 
 public class ResultDTO {
     private int bull; //количество полных совпадений
     private int cow; //количество совпадений без учёта позиции (исключая полные совпадения)
+    //todo: добавить в ответ количество попыток
 
     public ResultDTO(int bull, int cow) {
         this.bull = bull;

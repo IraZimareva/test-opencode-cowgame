@@ -1,11 +1,13 @@
 package zimareva.utils;
 
+import zimareva.dto.ResultDTO;
+
 import java.util.List;
 
 public class Checker {
 
-    public static ResultDTO checkNumber(String checkNumberStr, String benchmarkNumberStr){
-        List<Integer> checkNumber = Converter.convertStringToListOfInteger(checkNumberStr);
+    public static ResultDTO checkNumber(String enteredNumberStr, String benchmarkNumberStr){
+        List<Integer> checkNumber = Converter.convertStringToListOfInteger(enteredNumberStr);
         List<Integer> benchmarkNumber = Converter.convertStringToListOfInteger(benchmarkNumberStr);
 
         int cow = checkCow(checkNumber, benchmarkNumber);
@@ -20,6 +22,10 @@ public class Checker {
 
     //todo: такая проверка выдаст неправильное значение для повторяющихся чисел пользавтеля
     //todo: например для ввода 4444 (при эталоне 1234). Вывод будет 0Б4К, тогда как правильно должно быть 0Б1К
+    //другой пример
+    //Бенчмарк 1234. Пользовательский ввод 4324
+    //Должно быть ответом 1б3к, а ответ получается 1б4к.
+    //Условно б+к <=4
     private static int checkCow(List<Integer> checkNumber, List<Integer> benchmarkNumber){
         int cow = 0;
         for(Integer number: checkNumber){

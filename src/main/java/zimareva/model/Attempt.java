@@ -13,6 +13,10 @@ public class Attempt {
     public Attempt() {
     }
 
+    public Attempt(String enteredNumber) {
+        this.enteredNumber = enteredNumber;
+    }
+
     public Long getId() {
         return id;
     }
