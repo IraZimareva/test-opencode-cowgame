@@ -2,15 +2,12 @@ package zimareva.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import zimareva.exception.GameNotFoundException;
+import zimareva.exception.EntityNotFoundException;
 import zimareva.model.Game;
 import zimareva.repository.GameRepository;
 
-import javax.transaction.Transactional;
-
 @Service
 public class GameService {
-
     private final GameRepository gameRepository;
 
     @Autowired
@@ -24,13 +21,15 @@ public class GameService {
 
     public Game getGame(Long gameId){
         return gameRepository.findById(gameId).orElseThrow(() ->
-                new GameNotFoundException(gameId));
+                new EntityNotFoundException(Game.class.getName(), gameId));
     }
 
-    @Transactional
-    public Game editNumberOfAttempts(Long id, int numberOfAttempts){
+    public int incrementNumberOfAttempts(Long id){
         Game gameToEdit = getGame(id);
-        gameToEdit.setNumberOfAttempts(numberOfAttempts);
-        return gameToEdit;
+        System.out.println("Было до инкрементации попыток " + gameToEdit.getNumberOfAttempts());
+        gameToEdit.setNumberOfAttempts(gameToEdit.getNumberOfAttempts() + 1);
+        int incrAttempts = gameToEdit.getNumberOfAttempts();
+        System.out.println("Стало после инкремента попыток " + incrAttempts);
+        return incrAttempts;
     }
 }
