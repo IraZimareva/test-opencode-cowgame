@@ -10,7 +10,9 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="entered_number" type="VARCHAR(4)" />
-            <column name="game_id" type="BIGINT"/>
+            <column name="bull" type="BIGINT"/>
+            <column name="cow" type="integer"/>
+            <column name="game_id" type="integer"/>
         </createTable>
     </changeSet>
     <changeSet id="add_fk_game_id_to_game" author="Zimareva">

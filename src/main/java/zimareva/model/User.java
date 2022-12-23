@@ -10,7 +10,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String fio;
+    private String login;
     private String email;
     private String password;
     @OneToMany(
@@ -22,8 +22,8 @@ public class User {
     public User() {
     }
 
-    public User(String fio, String email, String password) {
-        this.fio = fio;
+    public User(String login, String email, String password) {
+        this.login = login;
         this.email = email;
         this.password = password;
     }
@@ -36,12 +36,12 @@ public class User {
         this.id = id;
     }
 
-    public String getFio() {
-        return fio;
+    public String getLogin() {
+        return login;
     }
 
-    public void setFio(String fio) {
-        this.fio = fio;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getEmail() {
@@ -76,7 +76,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", fio='" + fio + '\'' +
+                ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
 //                ", games=" + this.getGames() +

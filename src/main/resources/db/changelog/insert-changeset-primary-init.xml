@@ -6,7 +6,7 @@
 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet id="insert-into-person" author="Zimareva">
         <insert tableName="person">
-            <column name="fio" value="Zimareva Ira"/>
+            <column name="login" value="Zimareva Ira"/>
             <column name="email" value="irazimareva@mail.ru"/>
             <column name="password" value="password"/>
         </insert>
