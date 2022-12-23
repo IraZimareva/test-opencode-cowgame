@@ -55,7 +55,7 @@
     </div>
 
 
-    <div th:if="${result}">
+    <div th:if="${statistic}">
         <p class="lead">Предыдущие попытки</p>
         <div class="container border mt-3  py-3">
             <div class="row">
@@ -69,15 +69,15 @@
                     Результат
                 </div>
             </div>
-            <div class="row">
+            <div class="row" th:each="curr, iterStat : ${statistic}">
                 <div class="col-sm">
-                    № попытки
+                    <p th:text="${iterStat.count}"></p>
                 </div>
                 <div class="col-sm">
-                    Введенное число
+                    <p th:text="${curr.getEnteredNumber()}"></p>
                 </div>
                 <div class="col-sm">
-                    Результат
+                    <p th:text="${curr.getBull()} + ' Быки ' + ${curr.getCow()} + ' Коровы'"></p>
                 </div>
             </div>
         </div>
