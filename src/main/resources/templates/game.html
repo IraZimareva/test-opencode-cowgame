@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<h2 align="center">Веб-игра быки-коровы</h2>
+
+<div class="container shadow mt-4 bg-light py-4">
+    <p class="lead">Правила игры</p>
+    <div class="card">
+        <div class="card-body">
+            Компьютер загадал 4х значное число и бросает вам вызов - отгадать его за минимальное количество попыток!
+            Вы знаете, что цифры загаданного числа не повторяются. В каждую попытку вы предлагаете компьютеру свой
+            вариант числа. В ответ компьютер сообщает сколько цифр точно угадано (бык) и сколько цифр угадано без учета
+            позиции (корова). По данному ответу необходимо угадать заветное число. <br>
+            Пример: <br>
+            7328 -- загаданное число <br>
+            0819 -- 0Б1К <br>
+            4073 -- 0Б2К <br>
+            5820 -- 1Б1К <br>
+            3429 -- 1Б1К <br>
+            5960 -- 0Б0К <br>
+            7238 -- 2Б2К <br>
+            7328 -- 4Б0К (число угадано)
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <form method="POST" th:action="@{/games/{gameid}(gameid=${game.getId()})}" th:object="${numberDTO}"
+                      class="mb-3" name="checkNumber">
+                    <p class="lead">Введите число</p>
+                    <input type="number" th:field="${numberDTO.first}" id="number1" name="number1" min="0" max="9"
+                           style="max-width:2em; max-height: 2em; font-size: 2em; text-align: center;">
+                    <input type="number" th:field="${numberDTO.second}" id="number2" name="number2" min="0" max="9"
+                           style="max-width:2em; max-height: 2em; font-size: 2em; text-align: center;">
+                    <input type="number" th:field="${numberDTO.third}" id="number3" name="number3" min="0" max="9"
+                           style="max-width:2em; max-height: 2em; font-size: 2em; text-align: center;">
+                    <input type="number" th:field="${numberDTO.fourth}" id="number4" name="number4" min="0" max="9"
+                           style="max-width:2em; max-height: 2em; font-size: 2em; text-align: center;">
+                    <button type="submit" name="check" class="btn btn-success btn-lg"
+                            th:field="${game.getId()}">Проверить
+                    </button>
+                </form>
+            </div>
+            <div class="col-sm" th:if="${result}">
+                <p class="lead">Результат</p>
+                <h2 th:text="${result.getBull()} + ' Быки ' + ${result.getCow()} + ' Коровы'"></h2>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:if="${result}">
+        <p class="lead">Предыдущие попытки</p>
+        <div class="container border mt-3  py-3">
+            <div class="row">
+                <div class="col-sm">
+                    № попытки
+                </div>
+                <div class="col-sm">
+                    Введенное число
+                </div>
+                <div class="col-sm">
+                    Результат
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    № попытки
+                </div>
+                <div class="col-sm">
+                    Введенное число
+                </div>
+                <div class="col-sm">
+                    Результат
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>

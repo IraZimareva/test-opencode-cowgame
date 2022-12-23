@@ -1,7 +1,6 @@
 package zimareva.dto;
 
 public class NumberDTO {
-    private Long gameId;
     private int first;
     private int second;
     private int third;
@@ -10,20 +9,11 @@ public class NumberDTO {
     public NumberDTO() {
     }
 
-    public NumberDTO(Long gameId, int first, int second, int third, int fourth) {
-        this.gameId = gameId;
+    public NumberDTO(int first, int second, int third, int fourth) {
         this.first = first;
         this.second = second;
         this.third = third;
         this.fourth = fourth;
-    }
-
-    public Long getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(Long gameId) {
-        this.gameId = gameId;
     }
 
     public int getFirst() {

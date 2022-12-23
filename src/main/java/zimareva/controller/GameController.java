@@ -1,24 +1,25 @@
 package zimareva.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import zimareva.dto.NumberDTO;
 import zimareva.dto.ResultDTO;
 import zimareva.model.Game;
+import zimareva.service.GameService;
 import zimareva.service.MainService;
 
 @Controller
 @RequestMapping("/games")
 public class GameController {
     private final MainService mainService;
+    private final GameService gameService;
 
     @Autowired
-    public GameController(MainService mainService) {
+    public GameController(MainService mainService, GameService gameService) {
         this.mainService = mainService;
+        this.gameService = gameService;
     }
 
     @PostMapping
@@ -26,17 +27,21 @@ public class GameController {
                                Model model) {
         Game newGame = mainService.startNewGame(userId);
         model.addAttribute("game", newGame);
-        model.addAttribute("number",new NumberDTO());
         return "game";
     }
 
-/*
-    //todo: или gameId передавать @RequestBody по-другому? Например через @RequestParam
-    @PostMapping(value = "/checkNumber")
-    public ResponseEntity<ResultDTO> checkNumber(@RequestBody final NumberDTO number,
+    @PostMapping(value = "{gameid}")
+    public String checkNumber(@PathVariable final Long gameid,
+                                                 @ModelAttribute("numberDTO") final NumberDTO number,
                                                  Model model) {
-        ResultDTO resultDTO = mainService.checkNumber(number);
+        ResultDTO resultDTO = mainService.checkNumber(gameid, number);
+        model.addAttribute("game", gameService.getGame(gameid));
         model.addAttribute("result", resultDTO);
-        return new ResponseEntity<>(resultDTO, HttpStatus.OK);
-    }*/
+        return "game";
+    }
+
+    @ModelAttribute("numberDTO")
+    public NumberDTO populateGame(){
+        return new NumberDTO();
+    }
 }
