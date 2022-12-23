@@ -1,27 +1,27 @@
 package zimareva.utils;
 
-import zimareva.dto.ResultDTO;
+import zimareva.dto.CowBullDTO;
 
 import java.util.List;
 
 public class Checker {
 
-    public static ResultDTO checkNumber(String enteredNumberStr, String benchmarkNumberStr){
+    public static CowBullDTO checkNumber(String enteredNumberStr, String benchmarkNumberStr){
         List<Integer> checkNumber = Converter.convertStringToListOfInteger(enteredNumberStr);
         List<Integer> benchmarkNumber = Converter.convertStringToListOfInteger(benchmarkNumberStr);
 
         int cow = checkCow(checkNumber, benchmarkNumber);
         int bull = checkBull(checkNumber, benchmarkNumber);
-        ResultDTO resultDTO = new ResultDTO(bull, cow - bull);
+        CowBullDTO cowBullDTO = new CowBullDTO(bull, cow - bull);
 
-        System.out.println("Check bull " + resultDTO.getBull());
-        System.out.println("Check cow " + resultDTO.getCow());
+        System.out.println("Check bull " + cowBullDTO.getBull());
+        System.out.println("Check cow " + cowBullDTO.getCow());
 
-        return resultDTO;
+        return cowBullDTO;
     }
 
     //todo: такая проверка выдаст неправильное значение для повторяющихся чисел пользавтеля
-    //todo: например для ввода 4444 (при эталоне 1234). Вывод будет 0Б4К, тогда как правильно должно быть 0Б1К
+    //например для ввода 4444 (при бенчмарке 1234). Вывод будет 0Б4К, тогда как правильно должно быть 1Б0К
     //другой пример
     //Бенчмарк 1234. Пользовательский ввод 4324
     //Должно быть ответом 1б3к, а ответ получается 1б4к.
