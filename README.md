@@ -19,6 +19,8 @@
 7238 -- 2Б2К  
 7328 -- 4Б0К (число угадано) 
 
+Стартовый url 
+GET .../users/1
 
 **Стек технологий** <br>
 Backend: Java8, H2 database, Hibernate, SpringBoot <br>
