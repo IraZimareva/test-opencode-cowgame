@@ -20,12 +20,6 @@ public class Checker {
         return cowBullDTO;
     }
 
-    //todo: такая проверка выдаст неправильное значение для повторяющихся чисел пользавтеля
-    //например для ввода 4444 (при бенчмарке 1234). Вывод будет 0Б4К, тогда как правильно должно быть 1Б0К
-    //другой пример
-    //Бенчмарк 1234. Пользовательский ввод 4324
-    //Должно быть ответом 1б3к, а ответ получается 1б4к.
-    //Условно б+к <=4
     private static int checkCow(List<Integer> checkNumber, List<Integer> benchmarkNumber){
         int cow = 0;
         for(Integer number: checkNumber){
