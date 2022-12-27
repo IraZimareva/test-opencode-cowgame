@@ -23,6 +23,6 @@
 GET .../users/1
 
 **Стек технологий** <br>
-Backend: Java8, H2 database, Hibernate, SpringBoot <br>
+Backend: Java8, H2 database, Liquibase, Hibernate, SpringBoot <br>
 Frontend: HTML, Bootstrap, Thymeleaf 
 
